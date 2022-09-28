@@ -13,9 +13,9 @@ class TweetsController < ApplicationController
     def create
         image = params[:tweet][:image]
         if image != nil
-            params[:tweet][:image] = image.read
+            image = image.read
         end
-        @tweet = Tweet.new(message: params[:tweet][:message], tdate: Time.current, image: params[:tweet][:image])
+        @tweet = Tweet.new(message: params[:tweet][:message], tdate: Time.current, image: image)
         if @tweet.save
             #redirect_to '/'
             redirect_to root_path
@@ -42,6 +42,6 @@ class TweetsController < ApplicationController
     end
     def get_image
         image = Tweet.find(params[:id]) 
-        send_data image.file, disposition: :inline, type: 'image/png'
+        send_data image.image, disposition: :inline, type: 'image/png'
     end
 end
