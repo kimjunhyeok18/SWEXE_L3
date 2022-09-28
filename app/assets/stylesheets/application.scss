@@ -13,6 +13,12 @@
  *= require_tree .
  *= require_self
  */
+ 
+ .header1 {
+  float: left; 
+  width: 20%; 
+  padding:10px;
+ }
  .padding2 {
   font-size: 1rem;
   padding: 10%;
@@ -20,15 +26,28 @@
  .padding1 {
   padding: 10%;
  }
- 
+ .image_size1 {
+  width: 2%;
+  height: 2%;
+ }
  .container {
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template: 
+            "b a a" auto
+            "b c c" auto
+            "b c c" auto
+            "d d d" auto;
  }
  
- .container1 {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  grid-template-rows: repeat(3, 1fr);
- }
+.header {
+    grid-area: a;
+}
+.sidebar {
+    grid-area: b;
+}
+.main {
+    grid-area: c;
+}
+.footer {
+    grid-area: d;
+}

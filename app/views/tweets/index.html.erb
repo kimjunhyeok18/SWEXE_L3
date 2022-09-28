@@ -4,45 +4,49 @@
 
 
 
-
-<body class="container padding2">
     <div>
-        <h1> This site look like twitter </h1>
+        
     </div>
     
     <div>
-    <%= link_to '新規作成', controller: 'tweets', action: 'new' %>
+        <p>
+            <%= link_to 'Tweet', controller: 'tweets', action: 'new' %>
+        </p>
     </div>
     
-    <div >
+    <div>
         <div>
             <% @tweets.each do |tweet| %>
-        
-            <div>
-                <%= ((Time.current - tweet.tdate) / 60).to_i.to_s + "分前" %>
-            </div>
             
             <div>
-                <%= tweet.message %>
+                    <%= tweet.message %>
+                    <%= image_tag "/get_image/#{tweet.id}" %>
+            </div>
+
+            
+            <div>
+                
                 <%= link_to '詳細', "/tweets/#{tweet.id}" %>
                 <%= link_to '削除', "/tweets/#{tweet.id}", method: :delete %>
                 <%= link_to '編集', "/tweets/#{tweet.id}/edit"%>
             </div>
-            
+                <% tweet_time = (Time.current - tweet.tdate).to_i %>
+                <% tweet_time_m = (tweet_time/60).to_i %>
+                <% tweet_time_h = (tweet_time_m/60).to_i %>
+                <% tweet_time_h_m = tweet_time_m%60 %>
+                <% tweet_time_h = (tweet_time_m/60).to_i %>
+                <% if tweet_time_m < 60 %>
+                    <%= (tweet_time / 60).to_i.to_s + "m 前にされたtweet" %>
+                <% else %>
+                    <%= tweet_time_h.to_s+ "h"+ tweet_time_h_m.to_s + "m 前にされたtweet" %>
+                <% end %>
+            </div>
             <% end %>
         </div>
     </div>
     
-    <div>
-        image
-            <% @tweets.each do |tweet| %>
-                <div>
-                    <%= tweet.image %>
-                    <img src="<%= "#{tweet.image}" %>">
-                </div>
-            <% end %>
-            
-    </div>
+
+
     
-</body>
+
 
