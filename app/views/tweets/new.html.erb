@@ -1,0 +1,26 @@
+<% #presentメソッドはオブジェクトであるレシーバーの
+   #値が存在すればtrue、
+   #存在しなければfalseを返す %>
+<% if @tweet.errors.present? %>
+    <h3>エラーがあります。</h3>
+        <ul>
+        <% @tweet.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+    <% end %>
+        </ul>
+<% end %>
+
+
+<div class="padding1 container1">
+    <%= form_for @tweet , url: {action: :create} do |f| %>
+        <%= f.text_area :message, :size=>"20%x20%"%>
+    <div>
+        最大140字まで<p></p>
+    </div>
+    <div>
+        <%= f.label :photo %><p></p>
+        <%= f.file_field :image %><p></p>
+    </div>
+    <%= f.submit '登録' %>
+    <% end %> 
+</div>

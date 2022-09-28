@@ -1,0 +1,48 @@
+<title>
+    test-Tweet
+</title>
+
+
+
+
+<body class="container padding2">
+    <div>
+        <h1> This site look like twitter </h1>
+    </div>
+    
+    <div>
+    <%= link_to '新規作成', controller: 'tweets', action: 'new' %>
+    </div>
+    
+    <div >
+        <div>
+            <% @tweets.each do |tweet| %>
+        
+            <div>
+                <%= ((Time.current - tweet.tdate) / 60).to_i.to_s + "分前" %>
+            </div>
+            
+            <div>
+                <%= tweet.message %>
+                <%= link_to '詳細', "/tweets/#{tweet.id}" %>
+                <%= link_to '削除', "/tweets/#{tweet.id}", method: :delete %>
+                <%= link_to '編集', "/tweets/#{tweet.id}/edit"%>
+            </div>
+            
+            <% end %>
+        </div>
+    </div>
+    
+    <div>
+        image
+            <% @tweets.each do |tweet| %>
+                <div>
+                    <%= tweet.image %>
+                    <img src="<%= "#{tweet.image}" %>">
+                </div>
+            <% end %>
+            
+    </div>
+    
+</body>
+
